@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 注册自定义工厂bean -->
+    <bean id="teacherFactory1" class="com.spring.util.TeacherFactory"></bean>
+    <bean id="teacherFactory2" class="com.spring.util.TeacherFactory2"></bean>
+    <!--
+        告诉Spring容器，当前teacher类的实例化操作是由自定义的工厂bean创建的
+     -->
+
+    <bean id="teacher" class="com.spring.util.TeacherFactory" factory-method="createTeacher">
+    </bean>
+
+
+
+</beans>
