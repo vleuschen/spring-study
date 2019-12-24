@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 注册被监控的实现类 -->
+    <bean id="person" class="com.spring.service.impl.Person"></bean>
+
+    <!-- 注册通知的实现类 -->
+    <bean id="before" class="com.spring.advice.MyBeforeAdvice"></bean>
+
+    <!-- 注册代理监控对象生产工厂，返回监控代理对象,针对目标对象的所有方法 -->
+    <bean id="personProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="person"></property>
+        <!-- 拦截器 -->
+        <property name="interceptorNames">
+            <array>
+                <value>before</value>
+            </array>
+        </property>
+    </bean>
+
+
+    <bean id="teacher" class="com.spring.beans.Teacher">
+       <!-- 依赖注入呢 -->
+       <property name="teacherName" value="Dr.Chen"></property>
+       <property name="firends" value="mike,alan,cooler"></property>
+       <property name="school" value="西安邮电大学,北京大学"></property>
+    </bean>
+
+
+</beans>
